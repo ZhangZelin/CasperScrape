@@ -28,8 +28,9 @@ app.get('/', (req, res) => {
         //return res.status(200).send(stdout);
     });    
 });
-app.post('/', function (req, res) {
-
+app.post('/', (req, res) => {
+    console.log(req);
+    console.log(req.body);
     var url = req.body.url;
     // var url = req.body.__url;
     // var action = req.body.__action;
@@ -56,8 +57,8 @@ app.post('/', function (req, res) {
         //req.body.proxyaddress
     ];
 
-    var cmd = shellescape(url);
-    res.status(200).send(cmd);
+    //var cmd = shellescape(url);
+    res.status(200).send(url);
     // exec(cmd, {}, function (error, stdout) {
     //     if(error) {
     //         res.status(500).send(error);
