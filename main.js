@@ -56,9 +56,9 @@ app.post('/', (req, res) => {
     //     req.body.classifyingselectors
     //     //req.body.proxyaddress
     // ];
-    var args = 'casperjs' + ' index.js' + ' --url' + ' --classifying-selectors ' + req.body.url + ' ' + req.body.classifyingselectors;
+    var args = 'casperjs' + ' index.js' + ' --url=' + req.body.url + ' --classifying-selectors=' + req.body.classifyingselectors;
     //var cmd = shellescape(args);
-    res.status(200).send(args);
+    //res.status(200).send(args);
     // exec(cmd, {}, function (error, stdout) {
     //     if(error) {
     //         res.status(500).send(error);

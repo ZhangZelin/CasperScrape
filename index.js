@@ -66,16 +66,22 @@
 var links = [];
 var casper = require('casper').create();
 
+var url = casper.cli.raw.get('url');
+var classifyingselector = casper.cli.raw.get('classifying-selector');
+//var selector = casper.cli.get('selector');
+//var attribute = casper.cli.get('attribute');
+
 function getLinks() {
     var links = document.querySelectorAll('a.product-link');
     return Array.prototype.map.call(links, function(e) {
         return e.getAttribute('href');
     });
 }
-
-casper.start('https://www.walmart.ca/search/673419233606', function() {
+//'https://www.walmart.ca/search/673419233606'
+casper.start(url, function() {
    // Wait for the page to be loaded
-   this.waitForSelector('a[class="product-link"]');
+   this.waitForSelector(classifyingselector);
+   //'a[class="product-link"]'
 });
 
 // casper.then(function() {
