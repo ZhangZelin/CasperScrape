@@ -62,7 +62,7 @@
 
 // casper.waitForSelector('article > a[class="product-link"]', processPage, terminate);
 // casper.run();
-
+var js;
 var links = [];
 var casper = require('casper').create();
 
@@ -80,14 +80,16 @@ var classifyingselector = casper.cli.raw.get('classifying-selector');
 //     });
 // }
 
+casper.options.waitTimeout = 20000;
+
 //'https://www.walmart.ca/search/673419233606'
 casper.start(url, function () {
     // Wait for the page to be loaded
     this.waitForSelector(classifyingselector);
-    var js = this.evaluate(function () {
+    js = this.evaluate(function () {
         return document;
     });
-    this.echo(js.all[0].outerHTML);
+    //this.echo(js.all[0].outerHTML);
     //'a[class="product-link"]'
 });
 
@@ -96,9 +98,9 @@ casper.start(url, function () {
 //    this.fill('form[action="/search"]', { q: 'casperjs' }, true);
 // });
 
-casper.then(function () {
-    html = document.documentElement.outerHTML;
-});
+// casper.then(function () {
+//     html = document.documentElement.outerHTML;
+// });
 
 // casper.then(function() {
 //     // aggregate results for the 'casperjs' search
@@ -112,11 +114,10 @@ casper.then(function () {
 //     links = links.concat(this.evaluate(getLinks));
 // });
 
-casper.run();
-
-// casper.run(function () {
-//     // echo results in some pretty fashion
-//     //this.echo(links.length + ' links found:');
-//     this.echo(html).exit();
-//     //this.echo(' - ' + links.join('\n - ')).exit();
-// });
+//casper.run();
+casper.run(function () {
+    // echo results in some pretty fashion
+    //this.echo(links.length + ' links found:');
+    this.echo(js.all[0].outerHTML).exit();
+    //this.echo(' - ' + links.join('\n - ')).exit();
+});
