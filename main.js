@@ -29,9 +29,9 @@ app.get('/', (req, res) => {
     });    
 });
 app.post('/', (req, res) => {
-    console.log(req);
-    console.log(req.body);
-    var url = req.body.url;
+    //console.log(req);
+    //console.log(req.body);
+    var url = req.body;
     // var url = req.body.__url;
     // var action = req.body.__action;
     // var header = req.body.__header;
