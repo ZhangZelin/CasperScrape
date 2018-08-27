@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
     //console.log(req);
     //console.log(req.body);
-    var url = req.body;
+    //var url = req.body;
     // var url = req.body.__url;
     // var action = req.body.__action;
     // var header = req.body.__header;
@@ -47,8 +47,7 @@ app.post('/', (req, res) => {
     // var postData = JSON.stringify(req.body);
 
     var args = [
-        'casperjs',
-        'index.js',
+        'casperjs index.js',
         '--url',
         '--classifying-selectors',
         //'--proxy',
@@ -57,7 +56,7 @@ app.post('/', (req, res) => {
         //req.body.proxyaddress
     ];
 
-    //var cmd = shellescape(url);
+    var cmd = shellescape(args);
     res.status(200).send(url);
     // exec(cmd, {}, function (error, stdout) {
     //     if(error) {
