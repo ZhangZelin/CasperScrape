@@ -30,38 +30,45 @@ app.get('/', (req, res) => {
 });
 app.post('/', function (req, res) {
 
-    var url = req.body.__url;
-    var action = req.body.__action;
-    var header = req.body.__header;
-    var creds = req.body.__creds;
-    delete req.body.__url;
-    delete req.body.__action;
-    delete req.body.__header;
-    delete req.body.__creds;
+    // var url = req.body.__url;
+    // var action = req.body.__action;
+    // var header = req.body.__header;
+    // var creds = req.body.__creds;
+    // delete req.body.__url;
+    // delete req.body.__action;
+    // delete req.body.__header;
+    // delete req.body.__creds;
 
-    creds = JSON.parse(creds);
-    creds = JSON.stringify(creds);
+    // creds = JSON.parse(creds);
+    // creds = JSON.stringify(creds);
 
-    var postData = JSON.stringify(req.body);
+    // var postData = JSON.stringify(req.body);
 
     var args = [
         'casperjs',
-        './index.js',
-        '--web-security=no',
-        '--ignore-ssl-errors=true',
-        '--ssl-protocol=any',
-        url,
-        action,
-        creds,
-        postData
+        'index.js',
+        '--url',
+        '--classifying-selectors',
+        //'--proxy',
+        req.body.url,
+        req.body.classifyingselectors
+        //req.body.proxyaddress
     ];
 
     var cmd = shellescape(args);
+    res.status(200).send(cmd);
+    // exec(cmd, {}, function (error, stdout) {
+    //     if(error) {
+    //         res.status(500).send(error);
+    //         //res.send(500, {success: false, message: stdout})
+    //     }
+    //     else{
+    //         res.status(200).send(stdout);
 
-    exec(cmd, function (error, stdout) {
-        if(error) console.log(error);
-        res.end(stdout);
-    });
+    //         //res.send(200, {success: true, message: stdout});
+    //     }
+    //     //return res.status(200).send(stdout);
+    // });  
 
 });
 
