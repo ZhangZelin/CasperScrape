@@ -46,16 +46,17 @@ app.post('/', (req, res) => {
 
     // var postData = JSON.stringify(req.body);
 
-    var args = [
-        'casperjs index.js',
-        '--url',
-        '--classifying-selectors',
-        //'--proxy',
-        req.body.url,
-        req.body.classifyingselectors
-        //req.body.proxyaddress
-    ];
-
+    // var args = [
+    //     'casperjs'
+    //     'index.js',
+    //     '--url',
+    //     '--classifying-selectors',
+    //     //'--proxy',
+    //     req.body.url,
+    //     req.body.classifyingselectors
+    //     //req.body.proxyaddress
+    // ];
+    var args = 'casperjs' + ' index.js' + ' --url' + ' --classifying-selectors ' + req.body.url + ' ' + req.body.classifyingselectors;
     var cmd = shellescape(args);
     res.status(200).send(cmd);
     // exec(cmd, {}, function (error, stdout) {
