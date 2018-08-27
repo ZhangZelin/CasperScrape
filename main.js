@@ -16,8 +16,14 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => { 
     var cmd = "casperjs index.js";
     exec(cmd, {}, function (error, stdout) {
-        if(error) res.status(500).send(error);
-        return res.status(200).send(stdout);
+        if(error) {
+            //res.status(500).send(error);
+            res.send(500, {success: false, message: stdout})
+        }
+        else{
+            res.send(200, {success: true, message: stdout});
+        }
+        //return res.status(200).send(stdout);
     });    
 });
 app.post('/', function (req, res) {
