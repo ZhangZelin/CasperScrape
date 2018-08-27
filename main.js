@@ -57,7 +57,7 @@ app.post('/', (req, res) => {
     ];
 
     var cmd = shellescape(args);
-    res.status(200).send(url);
+    res.status(200).send(cmd);
     // exec(cmd, {}, function (error, stdout) {
     //     if(error) {
     //         res.status(500).send(error);
