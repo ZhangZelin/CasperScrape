@@ -89,7 +89,7 @@ casper.start(url, function () {
     js = this.evaluate(function () {
         return document;
     });
-    //this.echo(js.all[0].outerHTML);
+    this.echo(js.all[0].outerHTML);
     //'a[class="product-link"]'
 });
 
@@ -118,6 +118,6 @@ casper.start(url, function () {
 casper.run(function () {
     // echo results in some pretty fashion
     //this.echo(links.length + ' links found:');
-    this.echo(js.all[0].outerHTML).exit();
+    this.echo("done").exit();
     //this.echo(' - ' + links.join('\n - ')).exit();
 });
