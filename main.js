@@ -59,18 +59,18 @@ app.post('/', (req, res) => {
     var args = 'casperjs' + ' index.js' + ' --url=' + req.body.url + ' --classifying-selectors=' + req.body.classifyingselectors;
     //var cmd = shellescape(args);
     //res.status(200).send(args);
-    // exec(cmd, {}, function (error, stdout) {
-    //     if(error) {
-    //         res.status(500).send(error);
-    //         //res.send(500, {success: false, message: stdout})
-    //     }
-    //     else{
-    //         res.status(200).send(stdout);
+    exec(args, {}, function (error, stdout) {
+        if(error) {
+            res.status(500).send(error);
+            //res.send(500, {success: false, message: stdout})
+        }
+        else{
+            res.status(200).send(stdout);
 
-    //         //res.send(200, {success: true, message: stdout});
-    //     }
-    //     //return res.status(200).send(stdout);
-    // });  
+            //res.send(200, {success: true, message: stdout});
+        }
+        //return res.status(200).send(stdout);
+    });  
 
 });
 
