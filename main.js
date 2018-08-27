@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
 });
 app.post('/', function (req, res) {
 
+    var url = req.body.url;
     // var url = req.body.__url;
     // var action = req.body.__action;
     // var header = req.body.__header;
@@ -55,7 +56,7 @@ app.post('/', function (req, res) {
         //req.body.proxyaddress
     ];
 
-    var cmd = shellescape(args);
+    var cmd = shellescape(url);
     res.status(200).send(cmd);
     // exec(cmd, {}, function (error, stdout) {
     //     if(error) {
