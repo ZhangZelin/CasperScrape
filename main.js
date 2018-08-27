@@ -56,21 +56,22 @@ app.post('/', (req, res) => {
     //     req.body.classifyingselectors
     //     //req.body.proxyaddress
     // ];
+    var pa = JSON.parse(req.body);
     var args = 'casperjs' + ' index.js' + ' --url=' + req.body.url + ' --classifying-selectors=' + req.body.classifyingselectors;
     //var cmd = shellescape(args);
-    //res.status(200).send(args);
-    exec(args, {}, function (error, stdout) {
-        if(error) {
-            res.status(500).send(error);
-            //res.send(500, {success: false, message: stdout})
-        }
-        else{
-            res.status(200).send(stdout);
+    res.status(200).send(pa);
+    // exec(args, {}, function (error, stdout) {
+    //     if(error) {
+    //         res.status(500).send(error);
+    //         //res.send(500, {success: false, message: stdout})
+    //     }
+    //     else{
+    //         res.status(200).send(stdout);
 
-            //res.send(200, {success: true, message: stdout});
-        }
-        //return res.status(200).send(stdout);
-    });  
+    //         //res.send(200, {success: true, message: stdout});
+    //     }
+    //     //return res.status(200).send(stdout);
+    // });  
 
 });
 
