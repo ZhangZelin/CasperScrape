@@ -66,6 +66,8 @@ app.post('/', (req, res) => {
             //res.send(500, {success: false, message: stdout})
         }
         else{
+            console.log('hi');
+            console.log(stdout);
             res.status(200).send(stdout);
 
             //res.send(200, {success: true, message: stdout});
