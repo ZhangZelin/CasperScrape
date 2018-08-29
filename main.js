@@ -57,7 +57,9 @@ app.post('/', (req, res) => {
     //     //req.body.proxyaddress
     // ];
     //var pa = JSON.parse(req.body);
+    console.log("post");
     var args = 'casperjs' + ' index.js' + ' --url=' + req.body.url + ' --classifying-selector=' + req.body.classifyingselector;
+    console.log(args);
     //var cmd = shellescape(args);
     //res.status(200).send(args);
     exec(args, {}, function (error, stdout) {
