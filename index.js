@@ -85,21 +85,24 @@ casper.options.waitTimeout = 20000;
 //'https://www.walmart.ca/search/673419233606'
 casper.start(url, function () {
     // Wait for the page to be loaded
-    //this.waitForSelector(classifyingselector);
+    this.waitForSelector(classifyingselector);
     //this.echo(document.querySelectorAll('a.product-link')[0]);
     // js = this.evaluate(function () {
-    //     return document;
+    //         return document;
     // });
     // this.echo(js.all[0].outerHTML);
-    js = this.evaluate(function () {
+    //'a[class="product-link"]'
+    //console.log(classifyingselector === "a.product-link");
+});
+
+casper.then(function(){
+    js = this.evaluate(function (classifyingselector) {
         var obj =  document.querySelectorAll(classifyingselector);
         return Array.prototype.map.call(obj, function(e) {
             return e.parentElement.innerHTML;
         });
-    });
-    //'a[class="product-link"]'
-});
-
+    }, classifyingselector);
+})
 // casper.then(function() {
 //    // search for 'casperjs' from google form
 //    this.fill('form[action="/search"]', { q: 'casperjs' }, true);
@@ -126,6 +129,6 @@ casper.run(function () {
     // echo results in some pretty fashion
     //this.echo(links.length + ' links found:');
     //this.echo("done").exit();
-    this.echo(js.join('\n')).exit();
+    this.echo(js).exit();
     //this.echo(' - ' + links.join('\n - ')).exit();
 });
