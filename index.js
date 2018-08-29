@@ -85,7 +85,8 @@ casper.options.waitTimeout = 20000;
 //'https://www.walmart.ca/search/673419233606'
 casper.start(url, function () {
     // Wait for the page to be loaded
-    this.waitForSelector(classifyingselector);
+    //this.waitForSelector(classifyingselector);
+    //this.echo(document.querySelector(classifyingselector));
     js = this.evaluate(function () {
         return document;
     });
