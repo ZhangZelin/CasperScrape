@@ -80,7 +80,7 @@ var classifyingselector = casper.cli.raw.get('classifying-selector');
 //     });
 // }
 
-casper.options.waitTimeout = 10;
+casper.options.waitTimeout = 20000;
 
 //'https://www.walmart.ca/search/673419233606'
 casper.start(url, function () {
