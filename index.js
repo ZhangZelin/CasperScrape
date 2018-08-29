@@ -96,12 +96,16 @@ casper.start(url, function () {
 });
 
 casper.then(function(){
-    js = this.evaluate(function (classifyingselector) {
-        var obj =  document.querySelectorAll(classifyingselector);
-        return Array.prototype.map.call(obj, function(e) {
-            return e.parentElement.innerHTML;
-        });
-    }, classifyingselector);
+    // js = this.evaluate(function (classifyingselector) {
+    //     var obj =  document.querySelectorAll(classifyingselector);
+    //     return Array.prototype.map.call(obj, function(e) {
+    //         return e.parentElement.innerHTML;
+    //     });
+    // }, classifyingselector);
+    var js = this.evaluate(function() {
+		return document; 
+	});	
+    this.echo(js.all[0].outerHTML); 
 })
 // casper.then(function() {
 //    // search for 'casperjs' from google form
@@ -129,6 +133,6 @@ casper.run(function () {
     // echo results in some pretty fashion
     //this.echo(links.length + ' links found:');
     //this.echo("done").exit();
-    this.echo(js).exit();
+    this.exit();
     //this.echo(' - ' + links.join('\n - ')).exit();
 });
