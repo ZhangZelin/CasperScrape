@@ -92,7 +92,10 @@ casper.start(url, function () {
     // });
     // this.echo(js.all[0].outerHTML);
     js = this.evaluate(function () {
-        return document.querySelector("a.product-link").innerHTML;
+        var obj =  document.querySelectorAll("a.product-link");
+        return Array.prototype.map.call(obj, function(e) {
+            return e.parentElement.innerHTML;
+        });
     });
     //'a[class="product-link"]'
 });
@@ -123,6 +126,6 @@ casper.run(function () {
     // echo results in some pretty fashion
     //this.echo(links.length + ' links found:');
     //this.echo("done").exit();
-    this.echo(js).exit();
+    this.echo(js.join('\n')).exit();
     //this.echo(' - ' + links.join('\n - ')).exit();
 });
