@@ -1,7 +1,7 @@
 // /**
 //  * Scrape job title, url, and location from Taleo jobs page at https://l3com.taleo.net/careersection/l3_ext_us/jobsearch.ftl
 //  *
-//  * Usage: $ casperjs scraper.js 
+//  * Usage: $ casperjs scraper.js
 //  */
 // var casper = require("casper").create({
 //     pageSettings: {
@@ -37,9 +37,9 @@
 //     //job['link'] = rows.getAttribute('href');
 //     //job['url'] = a.getAttribute('href');
 //     //job['location'] = l.innerText;
-//     jobs.push(rows.getAttribute('href')); 
+//     jobs.push(rows.getAttribute('href'));
 //     console.log("push jobs");
-//     return jobs;       
+//     return jobs;
 // }
 
 // var processPage = function() {
@@ -64,12 +64,28 @@
 // casper.run();
 var js;
 var links = [];
-var casper = require('casper').create();
-
+var casper = require('casper').create(
+//);
+ {
+     pageSettings: {
+         loadImages:  false,        // do not load images
+         loadPlugins: false         // do not load NPAPI plugins (Flash, Silverlight, ...)
+     }
+});
+casper.options.onResourceRequested = function(C, requestData, request) {
+    if ((/https?:\/\/.+?\.css/gi).test(requestData['url']) || requestData['Content-Type'] == 'text/css') {
+      //console.log('Skipping CSS file: ' + requestData['url']);
+      request.abort();
+      }
+}
 var html;
 
 var url = casper.cli.raw.get('url');
 var classifyingselector = casper.cli.raw.get('classifying-selector');
+
+//var url = 'https://www.walmart.ca/search/673419233606';
+//var classifyingselector = 'a[class="product-link"]';
+
 //var selector = casper.cli.get('selector');
 //var attribute = casper.cli.get('attribute');
 
@@ -85,7 +101,6 @@ casper.options.waitTimeout = 20000;
 //'https://www.walmart.ca/search/673419233606'
 casper.start(url, function () {
     // Wait for the page to be loaded
-    this.waitForSelector(classifyingselector);
     //this.echo(document.querySelectorAll('a.product-link')[0]);
     // js = this.evaluate(function () {
     //         return document;
@@ -96,12 +111,18 @@ casper.start(url, function () {
 });
 
 casper.then(function(){
-    js = this.evaluate(function (classifyingselector) {
-        var obj =  document.querySelectorAll(classifyingselector);
-        return Array.prototype.map.call(obj, function(e) {
-            return e.parentElement.innerHTML;
-        });
-    }, classifyingselector);
+    // js = this.evaluate(function (classifyingselector) {
+    //     var obj = document.querySelectorAll(classifyingselector);
+    //     return Array.prototype.map.call(obj, function (e) {
+    //         return e.parentElement.innerHTML;
+    //     });
+    // }, classifyingselector);
+    //this.waitForSelector(classifyingselector);
+
+    js = this.evaluate(function () {
+         return document;
+    });
+        // this.echo(js.all[0].outerHTML);
 })
 // casper.then(function() {
 //    // search for 'casperjs' from google form
@@ -125,10 +146,13 @@ casper.then(function(){
 // });
 
 //casper.run();
+casper.waitForSelector(classifyingselector,function(){
+    this.echo(js.all[0].outerHTML);
+});
 casper.run(function () {
     // echo results in some pretty fashion
     //this.echo(links.length + ' links found:');
     //this.echo("done").exit();
-    this.echo(js).exit();
+    this.exit();
     //this.echo(' - ' + links.join('\n - ')).exit();
 });
