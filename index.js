@@ -111,17 +111,17 @@ casper.start(url, function () {
 });
 
 casper.then(function(){
-    // js = this.evaluate(function (classifyingselector) {
-    //     var obj = document.querySelectorAll(classifyingselector);
-    //     return Array.prototype.map.call(obj, function (e) {
-    //         return e.parentElement.innerHTML;
-    //     });
-    // }, classifyingselector);
-    //this.waitForSelector(classifyingselector);
+    js = this.evaluate(function (classifyingselector) {
+         var obj = document.querySelectorAll(classifyingselector);
+         return Array.prototype.map.call(obj, function (e) {
+             return e.parentElement.innerHTML;
+         });
+     }, classifyingselector);
+    this.waitForSelector(classifyingselector);
 
-    js = this.evaluate(function () {
-         return document;
-    });
+    //js = this.evaluate(function () {
+    //     return document;
+    //});
         // this.echo(js.all[0].outerHTML);
 })
 // casper.then(function() {
@@ -147,7 +147,8 @@ casper.then(function(){
 
 //casper.run();
 casper.waitForSelector(classifyingselector,function(){
-    this.echo(js.all[0].outerHTML);
+    //this.echo(js.all[0].outerHTML);
+    this.echo(js);
 });
 casper.run(function () {
     // echo results in some pretty fashion
