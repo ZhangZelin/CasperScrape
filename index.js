@@ -80,11 +80,11 @@ casper.options.onResourceRequested = function(C, requestData, request) {
 }
 var html;
 
-//var url = casper.cli.raw.get('url');
-//var classifyingselector = casper.cli.raw.get('classifying-selector');
+var url = casper.cli.raw.get('url');
+var classifyingselector = casper.cli.raw.get('classifying-selector');
 
-var url = 'https://www.walmart.ca/en/ip/lego-classic-large-creative-brick-box-10698/6000190449111';
-var classifyingselector = '.pricing-shipping';
+//var url = 'https://www.walmart.ca/en/ip/lego-classic-large-creative-brick-box-10698/6000190449111';
+//var classifyingselector = '.pricing-shipping';
 
 //var selector = casper.cli.get('selector');
 //var attribute = casper.cli.get('attribute');
@@ -111,17 +111,17 @@ casper.start(url, function () {
 });
 
 casper.then(function(){
-    // js = this.evaluate(function (classifyingselector) {
-    //      var obj = document.querySelectorAll(classifyingselector);
-    //      return Array.prototype.map.call(obj, function (e) {
-    //          return e.parentElement.innerHTML;
-    //      });
-    //  }, classifyingselector);
-    // this.waitForSelector(classifyingselector);
+    js = this.evaluate(function (classifyingselector) {
+         var obj = document.querySelectorAll(classifyingselector);
+         return Array.prototype.map.call(obj, function (e) {
+             return e.parentElement.innerHTML;
+         });
+     }, classifyingselector);
+    this.waitForSelector(classifyingselector);
 
-    js = this.evaluate(function () {
-        return document;
-    });
+    //js = this.evaluate(function () {
+    //    return document;
+    //});
         // this.echo(js.all[0].outerHTML);
 })
 // casper.then(function() {
@@ -147,8 +147,8 @@ casper.then(function(){
 
 //casper.run();
 casper.waitForSelector(classifyingselector,function(){
-    this.echo(js.all[0].outerHTML);
-    //this.echo(js);
+    //this.echo(js.all[0].outerHTML);
+    this.echo(js);
 });
 casper.run(function () {
     // echo results in some pretty fashion
